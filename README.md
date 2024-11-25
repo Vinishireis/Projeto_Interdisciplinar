@@ -54,10 +54,10 @@ O projeto utiliza as seguintes ferramentas e tecnologias:
 
 Os participantes deste projeto são:
 
-- [Nome do Integrante 1](#) - Função
-- [Nome do Integrante 2](#) - Função
-- [Nome do Integrante 3](#) - Função
-- [Nome do Integrante 4](#) - Função
+- [Marcos Hiroshi](#) - Função
+- [Vinícius Nishimura](#) - Função
+- [Breno Costa](#) - Função
+- [Bruno Souza](#) - Função
 
 ---
 
@@ -97,7 +97,7 @@ npm test  # ou comando relevante
 
 ## 📜 **Licença**
 
-Este projeto está licenciado sob a licença [MIT](LICENSE). Sinta-se à vontade para utilizá-lo, modificá-lo e distribuí-lo conforme necessário.
+Este projeto está licenciado sob a licença [CC0 1.0 Universal](LICENSE). Sinta-se à vontade para utilizá-lo, modificá-lo e distribuí-lo conforme necessário.
 
 ---
 
