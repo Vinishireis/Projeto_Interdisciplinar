@@ -54,10 +54,10 @@ O projeto utiliza as seguintes ferramentas e tecnologias:
 
 Os participantes deste projeto são:
 
-- [Marcos Hiroshi](#) - Função
-- [Vinícius Nishimura](#) - Função
-- [Breno Costa](#) - Função
-- [Bruno Souza](#) - Função
+- [<a href = "https://github.com/Marcos-Yogi">Marcos Hiroshi</a>](#) - Função
+- [<a href = "https://github.com/Vinishireis">Vinícius Nishimura</a>](#) - Função
+- [<a href = "https://github.com/brenocosta19">Breno Costa</a>](#) - Função
+- [<a href = "https://github.com/BrunoSouza06">Bruno Souza</a>](#) - Função
 
 ---
 
