@@ -60,6 +60,37 @@ Os participantes deste projeto são:
 - [<a href = "https://github.com/BrunoSouza06">Bruno Souza</a>](#) - Função
 
 ---
+## Funções e Cronograma **Não Oficial**
+
+---
+
+### **Cronograma - Duração: 16 Semanas**
+| **Semana** | **Atividade**                                 | **Responsável Principal**  | **Detalhes**                                                                 |
+|------------|-----------------------------------------------|----------------------------|------------------------------------------------------------------------------|
+| 1-2        | Definição da ODS e escopo do projeto          | Toda a equipe             | Reunião para decidir ODS, público-alvo, funcionalidades principais.         |
+| 3          | Wireframes e protótipo inicial               | Breno (Design UX/UI)      | Criação de layout básico e fluxos de navegação da aplicação.                |
+| 4          | Arquitetura do sistema                       | Marcos (Líder Técnico)    | Decisão sobre tecnologias e estrutura de pastas/camadas da aplicação.       |
+| 5-6        | Desenvolvimento do FrontEnd (HTML/CSS/JS)    | Vinícius e Breno          | Codificação do layout e interação inicial.                                  |
+| 7-8        | Configuração do BackEnd                      | Bruno e Marcos            | Criação do servidor, banco de dados e APIs.                                 |
+| 9          | Integração FrontEnd e BackEnd                | Toda a equipe             | Conexão entre as interfaces e os dados.                                     |
+| 10         | Testes iniciais                              | Toda a equipe             | Testar fluxo de dados e identificar bugs.                                   |
+| 11         | Melhorias e ajustes                          | Breno e Marcos            | Refinamento do design e otimização do código.                               |
+| 12-13      | Implementação de funcionalidades avançadas   | Vinícius e Bruno          | Adição de novas features com base na revisão inicial.                       |
+| 14         | Testes finais e validação                    | Toda a equipe             | Testes completos (usabilidade, segurança, desempenho).                      |
+| 15         | Documentação e apresentação                  | Bruno e Vinícius          | Preparação do pitch e documentação técnica.                                 |
+| 16         | Entrega final                                | Toda a equipe             | Submissão do projeto e feedback.                                            |
+
+---
+
+### **Tabela de Funções**
+| **Membro**     | **Função Principal**          | **Responsabilidades Secundárias**                                      |
+|-----------------|------------------------------|------------------------------------------------------------------------|
+| **Vinícius**   | Líder do FrontEnd            | Suporte no BackEnd, apresentação e documentação.                      |
+| **Breno**      | Designer UX/UI               | Codificação do FrontEnd, ajustes visuais e testes de usabilidade.     |
+| **Bruno**      | Desenvolvedor BackEnd        | Suporte na integração com FrontEnd e testes de APIs.                  |
+| **Marcos**     | Líder Técnico                | Decisão arquitetural, configuração inicial do BackEnd e otimização.   |
+
+---
 
 ## 🗓️ **Cronograma**
 
