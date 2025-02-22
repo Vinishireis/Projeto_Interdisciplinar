@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaComputer } from "react-icons/fa6"; // Ícones da versão 6
 import { FaBook, FaPaintBrush, FaLightbulb, FaUsers, FaHandsHelping, FaGlobe, FaChartLine } from "react-icons/fa"; // Ícones da versão 4
@@ -10,6 +10,8 @@ const subjectList = [
     icon: <FaComputer />,
     color: "#0063ff",
     delay: 0.2,
+    type: "Curso Técnico",
+    description: "Aprenda sobre programação, desenvolvimento de software e inovação tecnológica.",
   },
   {
     id: 2,
@@ -17,6 +19,8 @@ const subjectList = [
     icon: <FaBook />,
     color: "#00c986",
     delay: 0.3,
+    type: "Curso de Humanidades",
+    description: "Explore obras clássicas e contemporâneas, desenvolvendo habilidades de análise crítica.",
   },
   {
     id: 3,
@@ -24,6 +28,8 @@ const subjectList = [
     icon: <FaPaintBrush />,
     color: "#922aee",
     delay: 0.4,
+    type: "Curso Artístico",
+    description: "Descubra diferentes formas de expressão artística e cultural.",
   },
   {
     id: 4,
@@ -31,6 +37,8 @@ const subjectList = [
     icon: <FaLightbulb />,
     color: "#ea7516",
     delay: 0.5,
+    type: "Curso de Negócios",
+    description: "Desenvolva habilidades para criar e gerenciar seu próprio negócio.",
   },
   {
     id: 5,
@@ -38,6 +46,8 @@ const subjectList = [
     icon: <FaUsers />,
     color: "#075267",
     delay: 0.6,
+    type: "Curso Social",
+    description: "Aprenda sobre práticas educacionais que promovem a inclusão e a transformação social.",
   },
   {
     id: 6,
@@ -45,6 +55,8 @@ const subjectList = [
     icon: <FaHandsHelping />,
     color: "#986d1d",
     delay: 0.7,
+    type: "Curso de Serviço Comunitário",
+    description: "Participe de projetos voluntários e faça a diferença na comunidade.",
   },
   {
     id: 7,
@@ -52,6 +64,8 @@ const subjectList = [
     icon: <FaGlobe />,
     color: "#b93838",
     delay: 0.8,
+    type: "Curso Ambiental",
+    description: "Entenda os princípios da sustentabilidade e como aplicá-los no dia a dia.",
   },
   {
     id: 8,
@@ -59,10 +73,27 @@ const subjectList = [
     icon: <FaChartLine />,
     color: "#464646",
     delay: 0.9,
+    type: "Todos os Cursos",
+    description: "Explore todos os cursos disponíveis em nossa plataforma.",
   },
 ];
 
 const SubjectCard = () => {
+  const [selectedSubject, setSelectedSubject] = useState(null); // Estado para armazenar a matéria selecionada
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar a visibilidade do modal
+
+  // Função para abrir o modal com os dados da matéria selecionada
+  const handleSubjectClick = (subject) => {
+    setSelectedSubject(subject);
+    setIsModalOpen(true);
+  };
+
+  // Função para fechar o modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedSubject(null);
+  };
+
   return (
     <>
       <div className="container py-14 md:py-24">
@@ -72,7 +103,7 @@ const SubjectCard = () => {
             Nossas Áreas de Ensino
           </h1>
           <p className="font-semibold text-3xl">
-            Nossas Ensinos e Segmentos
+            Nossos Ensinos e Segmentos
           </p>
         </div>
         {/* cards section */}
@@ -89,6 +120,7 @@ const SubjectCard = () => {
                   delay: subject.delay,
                 }}
                 className="border rounded-lg border-secondary/20 p-4 flex justify-start items-center gap-4 hover:!scale-105 hover:!shadow-xl duration-200 cursor-pointer"
+                onClick={() => handleSubjectClick(subject)} // Abre o modal ao clicar na matéria
               >
                 <div
                   style={{
@@ -105,6 +137,31 @@ const SubjectCard = () => {
           })}
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedSubject && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg w-full max-w-md">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold">{selectedSubject.name}</h2>
+              <button
+                onClick={closeModal}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="space-y-4">
+              <p className="text-gray-600">
+                <strong>Tipo:</strong> {selectedSubject.type}
+              </p>
+              <p className="text-gray-600">
+                <strong>Descrição:</strong> {selectedSubject.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

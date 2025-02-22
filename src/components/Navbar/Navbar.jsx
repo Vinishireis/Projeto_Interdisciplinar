@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { NavbarMenu } from "../../mockData/data.js";
 import { MdMenu } from "react-icons/md";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom"; // Importe o Link do react-router-dom
-import ResponsiveMenu from "./ResponsiveMenu";
+import ResponsiveMenu from "./ResponsiveMenu.jsx";
 import instituto_criativo_logo from "../../assets/instituto_criativo_logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <>
       <motion.div
@@ -44,7 +45,7 @@ const Navbar = () => {
 
           {/* CTA Button section */}
           <div className="hidden lg:block space-x-6">
-            <Link to="/auth?mode=login">
+            <Link to="/auth">
               <button className="font-semibold">Login</button>
             </Link>
             <Link to="/auth?mode=signup">
@@ -61,7 +62,7 @@ const Navbar = () => {
         </div>
       </motion.div>
 
-      {/* mobile Sidebar section */}
+      {/* Mobile Sidebar section */}
       <ResponsiveMenu isOpen={isOpen} />
     </>
   );
