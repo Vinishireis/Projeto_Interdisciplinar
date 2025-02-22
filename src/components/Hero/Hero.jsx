@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import HeroImg from "../../assets/hero.png"; // Certifique-se de que a imagem está correta
 import { FaPlay } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { SlideRight } from "../../utility/animation";
 
 const Hero = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       <div className="container grid grid-cols-1 md:grid-cols-2 min-h-[650px] relative">
@@ -48,7 +50,10 @@ const Hero = () => {
               className="flex gap-8 justify-center md:justify-start !mt-8 items-center"
             >
               <button className="primary-btn">Comece Agora</button>
-              <button className="flex justify-end items-center gap-2 font-semibold">
+              <button
+                className="flex justify-end items-center gap-2 font-semibold"
+                onClick={() => setShowModal(true)}
+              >
                 <span className="w-10 h-10 bg-secondary/15 rounded-full flex justify-center items-center">
                   <FaPlay className="text-secondary" />
                 </span>
@@ -57,7 +62,6 @@ const Hero = () => {
             </motion.div>
           </div>
         </div>
-        {/* Imagem do Hero */}
         <div className="flex justify-center items-center relative z-10">
           <motion.img
             initial={{ opacity: 0, x: 200 }}
@@ -69,6 +73,30 @@ const Hero = () => {
           />
         </div>
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-8 rounded-lg max-w-3xl w-full relative">
+            <button
+              className="absolute top-2 right-2 text-gray-600"
+              onClick={() => setShowModal(false)}
+            >
+              &times;
+            </button>
+            <div className="relative" style={{ paddingBottom: "56.25%", height: 0 }}>
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/gPHI53pwwmE?si=6KAc6fSA0vNanSOT"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
