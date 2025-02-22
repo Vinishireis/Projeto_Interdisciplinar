@@ -52,7 +52,7 @@ const ResponsiveMenu = ({ isOpen }) => {
                 </Link> 
               </li>
               <li>
-                <Link to="/register" className="hover:text-orange-500 transition-colors duration-200">
+                <Link to="//auth?mode=signup" className="hover:text-orange-500 transition-colors duration-200">
                   Inscreva-se
                 </Link>
               </li>
