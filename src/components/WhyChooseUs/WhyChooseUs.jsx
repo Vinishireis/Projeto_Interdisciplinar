@@ -10,7 +10,7 @@ const WhyChooseData = [
   {
     id: 1,
     title: "Aprendizado",
-    desc: "Projeto de incentivo ao raciocínio lógico de crianças para desenvolver seu pensamento crítico, empreendedorismo, matemática e computação.",
+    desc: "Desenvolvimento de pensamento crítico, empreendedorismo, matemática e computação.",
     icon: <GrBook />,
     bgColor: "#0063ff",
     delay: 0.3,
@@ -18,7 +18,7 @@ const WhyChooseData = [
   {
     id: 2,
     title: "Primeiro emprego",
-    desc: "Jovens em busca do primeiro emprego,  para fornecer competências e habilidades, desenvolvimento pessoal e conhecimentos necessários para ingressar no mercado de trabalho.",
+    desc: "Competências e habilidades para jovens ingressarem no mercado de trabalho.",
     link: "/",
     icon: <GrBriefcase />,
     bgColor: "#73bc00",
@@ -27,7 +27,7 @@ const WhyChooseData = [
   {
     id: 3,
     title: "Recolocação",
-    desc: "Projeto de incentivo ao raciocínio lógico de crianças para desenvolver seu pensamento crítico, empreendedorismo, matemática e computação.",
+    desc: "Desenvolvimento de pensamento crítico, empreendedorismo, matemática e computação.",
     link: "/",
     icon: <GrMemory />,
     bgColor: "#fa6400",
@@ -36,7 +36,7 @@ const WhyChooseData = [
   {
     id: 4,
     title: "Bem-Estar",
-    desc: "Promovendo assistência para desenvolvimento social, por meio de atividades de conversação, terapias, doação de alimentos e palestras de reeducação da mente.",
+    desc: "Assistência social por meio de atividades, terapias, doação de alimentos e palestras.",
     link: "/",
     icon: <CiHeart />,
     bgColor: "#fe6baa",
