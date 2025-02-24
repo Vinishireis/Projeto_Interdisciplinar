@@ -1,46 +1,42 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom"; // Importe useSearchParams
-import axios from "axios"; // Importe o axios para fazer requisições HTTP
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
-  const isSignUp = searchParams.get("mode") === "signup"; // Verifica se o modo é "signup"
-  const [isLogin, setIsLogin] = useState(!isSignUp); // Define o estado inicial com base no modo
+  const isSignUp = searchParams.get("mode") === "signup";
+  const [isLogin, setIsLogin] = useState(!isSignUp);
 
   // Estados para os campos do formulário
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [tipo, setTipo] = useState("pessoa_fisica"); // Estado para o tipo de usuário
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validação básica
     if (!isLogin && senha !== confirmarSenha) {
       alert("As senhas não coincidem!");
       return;
     }
 
-    // Dados a serem enviados ao backend
     const url = isLogin ? "http://localhost:5000/login" : "http://localhost:5000/signup";
     const data = isLogin
-      ? { email, senha }
-      : { nome, email, senha };
+      ? { email, senha, tipo } // Inclui o tipo no login
+      : { nome, email, senha, tipo }; // Inclui o tipo no cadastro
 
     try {
-      // Envia a requisição ao backend
       const response = await axios.post(url, data);
       console.log("Resposta do servidor:", response.data);
 
       if (isLogin) {
-        // Redirecionar para a página principal após o login
         alert("Login bem-sucedido!");
       } else {
-        // Redirecionar para a página de login após o cadastro
         alert("Cadastro bem-sucedido!");
-        setIsLogin(true); // Alternar para a tela de login
+        setIsLogin(true);
       }
     } catch (error) {
       console.error("Erro:", error.response?.data || error.message);
@@ -121,6 +117,20 @@ const Auth = () => {
               />
             </div>
           )}
+          {/* Campo de seleção para o tipo de usuário */}
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-gray-700">Tipo de Usuário</label>
+            <select
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+            >
+              <option value="pessoa_fisica">Pessoa Física</option>
+              <option value="colaborador">Colaborador</option>
+              <option value="voluntario">Voluntário</option>
+              <option value="desenvolvedor">Desenvolvedor</option>
+            </select>
+          </div>
           <div className="flex items-center justify-between">
             <button
               type="submit"
@@ -132,7 +142,7 @@ const Auth = () => {
           {isLogin && (
             <div className="text-center">
               <a
-                href="#!"
+                href="/forgot-password"
                 className="text-sm text-orange-600 hover:text-orange-700 transition-colors duration-200"
               >
                 Esqueceu a senha?
