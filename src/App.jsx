@@ -40,16 +40,16 @@ const App = () => {
         />
 
         {/*Rota FAQ */}
-        <Route path="FAQ" element={<FAQ />} />
+        <Route path="/FAQ" element={<FAQ />} />
 
         {/* Rota Contato */}  
-        <Route path="contact" element={<Contact />} />
+        <Route path="/Contact" element={<Contact />} />
 
         {/* Rota Termos e Condições */}
-        <Route path="TermsConditions" element={<TermsConditions />} />
+        <Route path="/TermsConditions" element={<TermsConditions />} />
 
         {/* Rota Política de Privacidade */}
-        <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
 ''
         {/* Rota 404 */}
         <Route path="*" element={<h1>Página não encontrada</h1>} />
