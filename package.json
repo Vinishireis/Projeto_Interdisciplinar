@@ -13,7 +13,10 @@
   "dependencies": {
     "axios": "^1.7.9",
     "framer-motion": "^11.5.4",
+<<<<<<< HEAD
     "jsonwebtoken": "^9.0.2",
+=======
+>>>>>>> bf2cd4730106c99ea18a186ff5a726d83d9f7ef3
     "nodemailer": "^6.10.0",
     "react": "^18.3.1",
     "react-countup": "^6.5.3",
