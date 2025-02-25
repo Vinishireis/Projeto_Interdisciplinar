@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavbarMenu } from "../../mockData/data.js";
 import { MdMenu } from "react-icons/md";
@@ -7,7 +7,16 @@ import ResponsiveMenu from "./ResponsiveMenu.jsx";
 import instituto_criativo_logo from "../../assets/instituto_criativo_logo.png";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  // Verifica se há um nome de usuário no localStorage ao carregar o componente
+  useEffect(() => {
+    const name = localStorage.getItem("userName");
+    if (name) {
+      setUserName(name);
+    }
+  }, []);
 
   return (
     <>
@@ -19,12 +28,16 @@ const Navbar = () => {
         <div className="container flex justify-between items-center py-6">
           {/* Logo section */}
           <div className="text-2xl flex items-center gap-2 font-bold">
-            <img
-              src={instituto_criativo_logo}
-              alt="Instituto Criativo Logo"
-              className="w-10 h-10"
-            />
-            <p>Instituto Criativo</p>
+            <Link to="/">
+              <img
+                src={instituto_criativo_logo}
+                alt="Instituto Criativo Logo"
+                className="w-10 h-10"
+              />
+            </Link>
+            <Link to="/">
+              <p>Instituto Criativo</p>
+            </Link>
           </div>
 
           {/* Menu section */}
@@ -45,14 +58,32 @@ const Navbar = () => {
 
           {/* CTA Button section */}
           <div className="hidden lg:block space-x-6">
-            <Link to="/auth">
-              <button className="font-semibold">Login</button>
-            </Link>
-            <Link to="/auth?mode=signup">
-              <button className="text-white bg-secondary font-semibold rounded-full px-6 py-2">
-                Inscreva-se
-              </button>
-            </Link>
+          {userName ? (
+  <div className="flex items-center gap-4">
+    <span className="text-secondary font-semibold">Olá, {userName}!</span>
+    <button
+      onClick={() => {
+        localStorage.removeItem("userName");
+        setUserName(""); // Limpa o estado
+        window.location.reload(); // Recarrega a página (opcional)
+      }}
+      className="text-white bg-red-500 font-semibold rounded-full px-4 py-2"
+    >
+      Logout
+    </button>
+  </div>
+) : (
+  <>
+    <Link to="/auth">
+      <button className="font-semibold">Login</button>
+    </Link>
+    <Link to="/auth?mode=signup">
+      <button className="text-white bg-secondary font-semibold rounded-full px-6 py-2">
+        Inscreva-se
+      </button>
+    </Link>
+  </>
+)}
           </div>
 
           {/* Mobile Hamburger Menu */}

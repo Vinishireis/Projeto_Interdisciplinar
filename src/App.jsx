@@ -46,10 +46,10 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
 
         {/* Rota Termos e Condições */}
-        <Route path="/terms-conditions" element={<TermsConditions />} />
+        <Route path="/termsconditions" element={<TermsConditions />} />
 
         {/* Rota Política de Privacidade */}
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
 {/* Rota 404 */}
         <Route path="*" element={<h1>Página não encontrada</h1>} />
       </Routes>

@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const validator = require("validator");
 
 const app = express();
 app.use(express.json());
@@ -35,10 +37,34 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Middleware para verificar se o usuário é um desenvolvedor
+const isDeveloper = (req, res, next) => {
+  const userType = req.headers["user-type"];
+
+  if (userType !== "desenvolvedor") {
+    return res.status(403).json({ message: "Acesso negado. Você não tem permissão para acessar esta rota." });
+  }
+
+  next();
+};
+
 // Rota para cadastro de usuários
 app.post("/signup", async (req, res) => {
   try {
     const { nome, email, senha, tipo } = req.body;
+
+    // Validações básicas
+    if (!nome || !email || !senha || !tipo) {
+      return res.status(400).json({ message: "Todos os campos são obrigatórios." });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ message: "E-mail inválido." });
+    }
+
+    if (senha.length < 8) {
+      return res.status(400).json({ message: "A senha deve ter pelo menos 8 caracteres." });
+    }
 
     // Verificar se o e-mail já está cadastrado
     const [rows] = await db.promise().query("SELECT * FROM usuarios WHERE email = ?", [email]);
@@ -55,7 +81,11 @@ app.post("/signup", async (req, res) => {
       [nome, email, senhaHash, tipo]
     );
 
-    res.status(201).json({ message: "Usuário cadastrado com sucesso!" });
+    // Retornar uma resposta de sucesso com o nome do usuário
+    res.status(201).json({
+      message: "Usuário cadastrado com sucesso!",
+      nome: nome,
+    });
   } catch (error) {
     console.error("Erro no cadastro:", error);
     res.status(500).json({ message: "Erro interno no servidor." });
@@ -81,8 +111,18 @@ app.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Senha incorreta." });
     }
 
-    // Retornar uma resposta de sucesso sem token
-    res.status(200).json({ message: "Login bem-sucedido!", usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email } });
+    // Gerar token JWT
+    const token = jwt.sign(
+      { id: usuario.id, nome: usuario.nome, tipo: usuario.tipo },
+      "seuSegredoSuperSecreto", // Substitua por uma chave secreta forte
+      { expiresIn: "1h" } // Token expira em 1 hora
+    );
+
+    // Retornar uma resposta de sucesso com o token
+    res.status(200).json({
+      message: "Login bem-sucedido!",
+      token: token,
+    });
   } catch (error) {
     console.error("Erro no login:", error);
     res.status(500).json({ message: "Erro interno no servidor." });
@@ -118,7 +158,12 @@ app.post("/esqueci-senha", async (req, res) => {
       from: "seuemail@gmail.com",
       to: email,
       subject: "Redefinição de Senha",
-      text: `Clique no link para redefinir sua senha: ${resetLink}`,
+      html: `
+        <h1>Redefinição de Senha</h1>
+        <p>Clique no link abaixo para redefinir sua senha:</p>
+        <a href="${resetLink}">Redefinir Senha</a>
+        <p>Se você não solicitou essa redefinição, ignore este e-mail.</p>
+      `,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -165,6 +210,11 @@ app.post("/redefinir-senha", async (req, res) => {
     console.error("Erro ao redefinir senha:", error);
     res.status(500).json({ message: "Erro interno no servidor." });
   }
+});
+
+// Rota restrita para desenvolvedores
+app.get("/rota-restrita", isDeveloper, (req, res) => {
+  res.status(200).json({ message: "Bem-vindo, desenvolvedor!" });
 });
 
 // Iniciar o servidor

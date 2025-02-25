@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom"; // Importe o Link
+import { Link, useNavigate } from "react-router-dom"; // Adicionado useNavigate
 
 const ResponsiveMenu = ({ isOpen }) => {
+  const [userName, setUserName] = useState("");
+  const navigate = useNavigate(); // Hook para redirecionamento
+
+  // Verifica se há um nome de usuário no localStorage ao carregar o componente
+  useEffect(() => {
+    const name = localStorage.getItem("userName");
+    if (name) {
+      setUserName(name);
+    }
+  }, []);
+
+  // Função para lidar com o logout
+  const handleLogout = () => {
+    localStorage.removeItem("userName"); // Remove o nome do usuário
+    setUserName(""); // Limpa o estado
+    navigate("/"); // Redireciona para a página inicial
+  };
+
   return (
     <AnimatePresence mode="wait">
       {isOpen && (
@@ -40,22 +58,37 @@ const ResponsiveMenu = ({ isOpen }) => {
                   Contato
                 </Link>
               </li>
-              
               <li>
                 <Link to="/blog" className="hover:text-orange-500 transition-colors duration-200">
                   Blog
                 </Link>
               </li>
-              <li>
-                <Link to="/auth" className="hover:text-orange-500 transition-colors duration-200">
-                  Login
-                </Link> 
-              </li>
-              <li>
-                <Link to="/auth?mode=signup" className="hover:text-orange-500 transition-colors duration-200">
-                  Inscreva-se
-                </Link>
-              </li>
+              {userName ? (
+                <>
+                  <li className="text-orange-500">Olá, {userName}!</li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="text-white bg-red-500 font-semibold rounded-full px-4 py-2"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/auth" className="hover:text-orange-500 transition-colors duration-200">
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/auth?mode=signup" className="hover:text-orange-500 transition-colors duration-200">
+                      Inscreva-se
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </motion.div>

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { SlideRight, SlideLeft } from "../../utility/animation"; // Certifique-se de importar as animações corretas
+import { SlideRight, SlideLeft } from "../../utility/animation";
+import validator from "validator"; // Para sanitização
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -14,14 +15,27 @@ const Auth = () => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [mostrarSenha, setMostrarSenha] = useState(false); // Estado para controlar a visibilidade da senha
   const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false); // Estado para controlar a visibilidade da confirmação de senha
   const [tipo, setTipo] = useState("pessoa_fisica");
   const [erro, setErro] = useState("");
+  const [tentativasLogin, setTentativasLogin] = useState(0);
 
-  // Função para validar o e-mail
+  // Funções de validação
   const validarEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
+  };
+
+  const validarSenha = (senha) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(senha);
+  };
+
+  const validarNome = (nome) => {
+    const regex = /^[A-Za-zÀ-ú\s]+$/;
+    return regex.test(nome);
   };
 
   // Função para lidar com o envio do formulário
@@ -40,15 +54,25 @@ const Auth = () => {
       return;
     }
 
-    if (senha.length < 6) {
-      setErro("A senha deve ter pelo menos 6 caracteres.");
+    if (!validarSenha(senha)) {
+      setErro("A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um caractere especial.");
       return;
     }
 
+    if (!isLogin && !validarNome(nome)) {
+      setErro("O nome não pode conter números ou caracteres especiais.");
+      return;
+    }
+
+    // Sanitização dos dados
+    const sanitizedNome = validator.escape(nome);
+    const sanitizedEmail = validator.normalizeEmail(email);
+    const sanitizedSenha = validator.escape(senha);
+
     const url = isLogin ? "http://localhost:5000/login" : "http://localhost:5000/signup";
     const data = isLogin
-      ? { email, senha } // Removido o campo "tipo" do login
-      : { nome, email, senha, tipo };
+      ? { email: sanitizedEmail, senha: sanitizedSenha }
+      : { nome: sanitizedNome, email: sanitizedEmail, senha: sanitizedSenha, tipo };
 
     try {
       const response = await axios.post(url, data);
@@ -56,26 +80,41 @@ const Auth = () => {
 
       if (isLogin) {
         alert("Login bem-sucedido!");
-        navigate("/"); // Redireciona para a tela de início
+        // Armazena o nome e o tipo de usuário no localStorage
+        localStorage.setItem("userName", response.data.nome);
+        localStorage.setItem("userType", response.data.tipo);
+        console.log("Nome armazenado:", response.data.nome);
+        console.log("Tipo de usuário:", response.data.tipo);
+
+        // Redireciona com base no tipo de usuário
+        if (response.data.tipo === "desenvolvedor") {
+          navigate("/dashboard-desenvolvedor"); // Rota para desenvolvedores
+        } else {
+          navigate("/"); // Rota padrão para outros tipos de usuário
+        }
       } else {
         alert("Cadastro bem-sucedido!");
+        // Armazena o nome do usuário no localStorage após o cadastro
+        localStorage.setItem("userName", sanitizedNome);
+        console.log("Nome armazenado:", sanitizedNome);
         setIsLogin(true); // Alternar para a tela de login
       }
     } catch (error) {
       console.error("Erro:", error.response?.data || error.message);
       setErro(error.response?.data?.message || "Ocorreu um erro. Tente novamente.");
+
+      if (isLogin) {
+        setTentativasLogin(tentativasLogin + 1);
+        if (tentativasLogin >= 3) {
+          setErro("Muitas tentativas de login. Tente novamente mais tarde.");
+          return;
+        }
+      }
     }
   };
 
   return (
     <div className="container min-h-[650px] relative py-14">
-      {/* Texto de fundo */}
-      <div className="absolute inset-0 flex justify-center items-center">
-        <h1 className="text-[100px] md:text-[150px] lg:text-[150px] font-bold text-gray-300 opacity-20 text-center -z-10">
-          {isLogin ? "Login" : "Cadastro"}
-        </h1>
-      </div>
-
       {/* Conteúdo principal */}
       <div className="relative z-10">
         <motion.h1
@@ -87,47 +126,6 @@ const Auth = () => {
           {isLogin ? "Faça Login" : "Crie sua Conta"}
         </motion.h1>
 
-        {/* Alternar entre Login e Inscreva-se */}
-        <motion.div
-          variants={SlideRight(0.6)}
-          initial="hidden"
-          animate="visible"
-          className="flex justify-center gap-4 mt-6"
-        >
-          <button
-            onClick={() => setIsLogin(true)}
-            className={`text-lg font-semibold ${
-              isLogin
-                ? "text-orange-600 border-b-2 border-orange-600"
-                : "text-gray-400 hover:text-orange-600"
-            } transition-colors duration-200`}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => setIsLogin(false)}
-            className={`text-lg font-semibold ${
-              !isLogin
-                ? "text-orange-600 border-b-2 border-orange-600"
-                : "text-gray-400 hover:text-orange-600"
-            } transition-colors duration-200`}
-          >
-            Inscreva-se
-          </button>
-        </motion.div>
-
-        {/* Mensagem de erro */}
-        {erro && (
-          <motion.div
-            variants={SlideRight(0.8)}
-            initial="hidden"
-            animate="visible"
-            className="text-center text-red-600 text-sm mt-4"
-          >
-            {erro}
-          </motion.div>
-        )}
-
         {/* Formulário */}
         <motion.form
           variants={SlideRight(1.0)}
@@ -138,10 +136,10 @@ const Auth = () => {
         >
           {!isLogin && (
             <div className="space-y-1">
-              <label className="text-sm font-medium text-gray-700">Nome</label>
+              <label className="text-sm font-medium text-gray-700">Nome Completo</label>
               <input
                 type="text"
-                placeholder="Seu nome"
+                placeholder="Seu Nome Completo"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
@@ -162,29 +160,118 @@ const Auth = () => {
           </div>
           <div className="space-y-1">
             <label className="text-sm font-medium text-gray-700">Senha</label>
-            <input
-              type="password"
-              placeholder="Sua senha"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-              required
-            />
+            <div className="relative">
+              <input
+                type={mostrarSenha ? "text" : "password"} // Alterna entre "text" e "password"
+                placeholder="Sua senha"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setMostrarSenha(!mostrarSenha)} // Alterna o estado de mostrarSenha
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+              >
+                {mostrarSenha ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
           {!isLogin && (
             <div className="space-y-1">
               <label className="text-sm font-medium text-gray-700">Confirme a Senha</label>
-              <input
-                type="password"
-                placeholder="Confirme sua senha"
-                value={confirmarSenha}
-                onChange={(e) => setConfirmarSenha(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={mostrarConfirmarSenha ? "text" : "password"} // Alterna entre "text" e "password"
+                  placeholder="Confirme sua senha"
+                  value={confirmarSenha}
+                  onChange={(e) => setConfirmarSenha(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setMostrarConfirmarSenha(!mostrarConfirmarSenha)} // Alterna o estado de mostrarConfirmarSenha
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                >
+                  {mostrarConfirmarSenha ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-gray-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-gray-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
           )}
-          {/* Campo de seleção para o tipo de usuário */}
           <div className="space-y-1">
             <label className="text-sm font-medium text-gray-700">Tipo de Usuário</label>
             <select
@@ -207,14 +294,9 @@ const Auth = () => {
               {isLogin ? "Entrar" : "Criar Conta"}
             </button>
           </div>
-          {isLogin && (
-            <div className="text-center">
-              <a
-                href="/forgot-password"
-                className="text-sm text-orange-600 hover:text-orange-700 transition-colors duration-200"
-              >
-                Esqueceu a senha?
-              </a>
+          {erro && (
+            <div className="text-center text-red-600 text-sm mt-4">
+              {erro}
             </div>
           )}
         </motion.form>
