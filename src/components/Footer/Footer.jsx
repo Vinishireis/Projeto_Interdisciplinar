@@ -65,7 +65,7 @@ const Footer = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <a href="/auth" className="hover:text-secondary duration-200">
                       Login
                     </a>
                   </li>
@@ -104,22 +104,22 @@ const Footer = () => {
                 </h1>
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <a href="/TermsConditions" className="hover:text-secondary duration-200">
+                    <a href="/termsconditions" className="hover:text-secondary duration-200">
                       Termos e Condições
                     </a>
                   </li>
                   <li>
-                    <a href="/PrivacyPolicy" className="hover:text-secondary duration-200">
+                    <a href="/privacypolicy" className="hover:text-secondary duration-200">
                       Política de Privacidade
                     </a>
                   </li>
                   <li>
-                    <a href="/Contact" className="hover:text-secondary duration-200">
+                    <a href="/contact" className="hover:text-secondary duration-200">
                       Contato
                     </a>
                   </li>
                   <li>
-                    <a href="/FAQ" className="hover:text-secondary duration-200">
+                    <a href="/faq" className="hover:text-secondary duration-200">
                       FAQ
                     </a>
                   </li>

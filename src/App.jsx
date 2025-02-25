@@ -34,13 +34,10 @@ const App = () => {
         <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Proteção de Rota: Se não estiver autenticado, redireciona para login */}
-        <Route
-          path="/dashboard"
-          element={isAuthenticated ? <h1>Dashboard</h1> : <Navigate to="/auth" />}
-        />
+        <Route path="/dashboard" element={isAuthenticated ? <h1>Dashboard</h1> : <Navigate to="/auth" />} />
 
-        {/*Rota FAQ */}
-        <Route path="/FAQ" element={<FAQ />} />
+        {/* Rota FAQ */}
+        <Route path="/faq" element={<FAQ />} />
 
         {/* Rota Contato */}  
         <Route path="/contact" element={<Contact />} />
