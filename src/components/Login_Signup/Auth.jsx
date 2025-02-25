@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
+import { SlideRight, SlideLeft } from "../../utility/animation"; // Certifique-se de importar as animações corretas
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -66,10 +68,32 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-600 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 space-y-8 transform transition-all duration-300 hover:scale-105">
+    <div className="container min-h-[650px] relative py-14">
+      {/* Texto de fundo */}
+      <div className="absolute inset-0 flex justify-center items-center">
+        <h1 className="text-[100px] md:text-[150px] lg:text-[150px] font-bold text-gray-300 opacity-20 text-center -z-10">
+          {isLogin ? "Login" : "Cadastro"}
+        </h1>
+      </div>
+
+      {/* Conteúdo principal */}
+      <div className="relative z-10">
+        <motion.h1
+          variants={SlideRight(0.4)}
+          initial="hidden"
+          animate="visible"
+          className="text-5xl font-semibold lg:text-6xl !leading-tight text-center md:text-left"
+        >
+          {isLogin ? "Faça Login" : "Crie sua Conta"}
+        </motion.h1>
+
         {/* Alternar entre Login e Inscreva-se */}
-        <div className="flex justify-center gap-4">
+        <motion.div
+          variants={SlideRight(0.6)}
+          initial="hidden"
+          animate="visible"
+          className="flex justify-center gap-4 mt-6"
+        >
           <button
             onClick={() => setIsLogin(true)}
             className={`text-lg font-semibold ${
@@ -90,17 +114,28 @@ const Auth = () => {
           >
             Inscreva-se
           </button>
-        </div>
+        </motion.div>
 
         {/* Mensagem de erro */}
         {erro && (
-          <div className="text-center text-red-600 text-sm">
+          <motion.div
+            variants={SlideRight(0.8)}
+            initial="hidden"
+            animate="visible"
+            className="text-center text-red-600 text-sm mt-4"
+          >
             {erro}
-          </div>
+          </motion.div>
         )}
 
         {/* Formulário */}
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <motion.form
+          variants={SlideRight(1.0)}
+          initial="hidden"
+          animate="visible"
+          onSubmit={handleSubmit}
+          className="mt-8 space-y-6 max-w-md mx-auto"
+        >
           {!isLogin && (
             <div className="space-y-1">
               <label className="text-sm font-medium text-gray-700">Nome</label>
@@ -182,7 +217,7 @@ const Auth = () => {
               </a>
             </div>
           )}
-        </form>
+        </motion.form>
       </div>
     </div>
   );
