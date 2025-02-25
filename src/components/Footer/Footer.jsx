@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import FooterImg from "../../assets/footer.jpg";
 import instituto_criativo_logo from "../../assets/instituto_criativo_logo.png";
@@ -104,18 +104,23 @@ const Footer = () => {
                 </h1>
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <a href="TermsConditions" className="hover:text-secondary duration-200">
                       Termos e Condições
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <a href="PrivacyPolicy" className="hover:text-secondary duration-200">
                       Política de Privacidade
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <a href="Contact" className="hover:text-secondary duration-200">
                       Contato
+                    </a>
+                  </li>
+                  <li>
+                    <a href="FAQ" className="hover:text-secondary duration-200">
+                      FAQ
                     </a>
                   </li>
                 </ul>

@@ -1,32 +1,52 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
   const isSignUp = searchParams.get("mode") === "signup";
   const [isLogin, setIsLogin] = useState(!isSignUp);
+  const navigate = useNavigate();
 
   // Estados para os campos do formulário
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-  const [tipo, setTipo] = useState("pessoa_fisica"); // Estado para o tipo de usuário
+  const [tipo, setTipo] = useState("pessoa_fisica");
+  const [erro, setErro] = useState("");
+
+  // Função para validar o e-mail
+  const validarEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErro("");
 
+    // Validações no frontend
     if (!isLogin && senha !== confirmarSenha) {
-      alert("As senhas não coincidem!");
+      setErro("As senhas não coincidem!");
+      return;
+    }
+
+    if (!validarEmail(email)) {
+      setErro("E-mail inválido.");
+      return;
+    }
+
+    if (senha.length < 6) {
+      setErro("A senha deve ter pelo menos 6 caracteres.");
       return;
     }
 
     const url = isLogin ? "http://localhost:5000/login" : "http://localhost:5000/signup";
     const data = isLogin
-      ? { email, senha, tipo } // Inclui o tipo no login
-      : { nome, email, senha, tipo }; // Inclui o tipo no cadastro
+      ? { email, senha } // Removido o campo "tipo" do login
+      : { nome, email, senha, tipo };
 
     try {
       const response = await axios.post(url, data);
@@ -34,13 +54,14 @@ const Auth = () => {
 
       if (isLogin) {
         alert("Login bem-sucedido!");
+        navigate("/"); // Redireciona para a tela de início
       } else {
         alert("Cadastro bem-sucedido!");
-        setIsLogin(true);
+        setIsLogin(true); // Alternar para a tela de login
       }
     } catch (error) {
       console.error("Erro:", error.response?.data || error.message);
-      alert(error.response?.data?.message || "Ocorreu um erro. Tente novamente.");
+      setErro(error.response?.data?.message || "Ocorreu um erro. Tente novamente.");
     }
   };
 
@@ -71,6 +92,13 @@ const Auth = () => {
           </button>
         </div>
 
+        {/* Mensagem de erro */}
+        {erro && (
+          <div className="text-center text-red-600 text-sm">
+            {erro}
+          </div>
+        )}
+
         {/* Formulário */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {!isLogin && (
@@ -82,6 +110,7 @@ const Auth = () => {
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                required
               />
             </div>
           )}
@@ -93,6 +122,7 @@ const Auth = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+              required
             />
           </div>
           <div className="space-y-1">
@@ -103,6 +133,7 @@ const Auth = () => {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+              required
             />
           </div>
           {!isLogin && (
@@ -114,6 +145,7 @@ const Auth = () => {
                 value={confirmarSenha}
                 onChange={(e) => setConfirmarSenha(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                required
               />
             </div>
           )}
@@ -124,6 +156,7 @@ const Auth = () => {
               value={tipo}
               onChange={(e) => setTipo(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+              required
             >
               <option value="pessoa_fisica">Pessoa Física</option>
               <option value="colaborador">Colaborador</option>

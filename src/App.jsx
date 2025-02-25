@@ -5,6 +5,11 @@ import Home from "./Home"; // Mova a Home para um arquivo separado
 import Auth from "./components/Login_Signup/Auth";
 import ResetPassword from "./components/Login_Signup/ResetPassword";
 import ForgotPassword from "./components/Login_Signup/ForgotPassword";
+import FAQ from "./components/FAQ/FAQ";
+import Contact from "./components/Contact/Contact";
+import TermsConditions from "./components/TermsConditions/TermsConditions";
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+
 
 const App = () => {
   const isAuthenticated = false; // Simule um usuário autenticado (troque para `true` se necessário)
@@ -34,6 +39,18 @@ const App = () => {
           element={isAuthenticated ? <h1>Dashboard</h1> : <Navigate to="/auth" />}
         />
 
+        {/*Rota FAQ */}
+        <Route path="FAQ" element={<FAQ />} />
+
+        {/* Rota Contato */}  
+        <Route path="contact" element={<Contact />} />
+
+        {/* Rota Termos e Condições */}
+        <Route path="TermsConditions" element={<TermsConditions />} />
+
+        {/* Rota Política de Privacidade */}
+        <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
+''
         {/* Rota 404 */}
         <Route path="*" element={<h1>Página não encontrada</h1>} />
       </Routes>
