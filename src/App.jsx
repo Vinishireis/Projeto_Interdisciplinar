@@ -9,6 +9,7 @@ import FAQ from "./components/FAQ/FAQ";
 import Contact from "./components/Contact/Contact";
 import TermsConditions from "./components/TermsConditions/TermsConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import ProfileSettings from "./components/ProfileSettings/ProfileSettings ";
 
 
 const App = () => {
@@ -47,8 +48,13 @@ const App = () => {
 
         {/* Rota Política de Privacidade */}
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-{/* Rota 404 */}
+        
+        {/* Rota 404 */}
         <Route path="*" element={<h1>Página não encontrada</h1>} />
+
+        {/* Rota Tela de Configurações de Perfil */}
+        <Route path="/profile-settings" element={<ProfileSettings />} />
+
       </Routes>
     </>
   );

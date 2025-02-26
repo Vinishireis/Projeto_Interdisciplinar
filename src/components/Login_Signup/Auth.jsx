@@ -76,14 +76,6 @@ const Auth = () => {
 
       const userType = localStorage.getItem("userType");
 
-      if (userType === "desenvolvedor") {
-        // Permite acesso a funcionalidades específicas para desenvolvedores
-      } else {
-        // Exibe uma mensagem de erro ou redireciona para uma página de acesso negado
-        alert("Acesso negado. Você não tem permissão para acessar esta funcionalidade.");
-        navigate("/"); // Redireciona para a página inicial
-      }
-
     try {
       const response = await axios.post(url, data);
       console.log("Resposta do servidor:", response.data);

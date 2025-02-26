@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { SlideUp } from "../../utility/animation";
+import { Link, useNavigate } from "react-router-dom";
 
 const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Simula o estado de autenticação
+  const navigate = useNavigate();
+
+  const handleCriativoClick = () => {
+    if (isLoggedIn) {
+      // Se o usuário estiver logado, redirecione para o Blog
+      navigate("/blog");
+    } else {
+      // Se não estiver logado, redirecione para o Login
+      navigate("/auth");
+    }
+  };
+
   return (
     <div className="bg-[#f9f9f9] pb-14">
       <div className="container">
@@ -54,7 +68,9 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
               whileInView={"visible"}
               className="flex justify-center md:justify-start"
             >
-              <button className="primary-btn !mt-5"> Quero ser Criativo!</button>
+              <Link to={link} className="primary-btn !mt-5" onClick={handleCriativoClick}>
+                {tag === "sobre" ? "Saiba mais" : "Quero ser Criativo!"}
+              </Link>
             </motion.div>
           </div>
         </div>
