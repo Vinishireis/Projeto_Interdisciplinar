@@ -42,52 +42,54 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErro("");
-  
+
     // Validações no frontend
     if (!isLogin && senha !== confirmarSenha) {
       setErro("As senhas não coincidem!");
       return;
     }
-  
+
     if (!validarEmail(email)) {
       setErro("E-mail inválido.");
       return;
     }
-  
+
     if (!validarSenha(senha)) {
       setErro("A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um caractere especial.");
       return;
     }
-  
+
     if (!isLogin && !validarNome(nome)) {
       setErro("O nome não pode conter números ou caracteres especiais.");
       return;
     }
-  
+
     // Sanitização dos dados
     const sanitizedNome = validator.escape(nome);
     const sanitizedEmail = validator.normalizeEmail(email);
     const sanitizedSenha = validator.escape(senha);
-  
+
     const url = isLogin ? "http://localhost:5000/login" : "http://localhost:5000/signup";
     const data = isLogin
       ? { email: sanitizedEmail, senha: sanitizedSenha }
       : { nome: sanitizedNome, email: sanitizedEmail, senha: sanitizedSenha, tipo };
 
-      const userType = localStorage.getItem("userType");
-
     try {
       const response = await axios.post(url, data);
       console.log("Resposta do servidor:", response.data);
-  
+
       if (isLogin) {
         alert("Login bem-sucedido!");
-        // Armazena o nome do usuário no localStorage
+        // Armazena o nome do usuário e o token no localStorage
         localStorage.setItem("userName", response.data.nome);
         localStorage.setItem("userType", response.data.tipo);
+        localStorage.setItem("token", response.data.token); // Armazena o token
         console.log("Nome armazenado:", response.data.nome);
         console.log("Tipo de usuário:", response.data.tipo);
-        navigate("/"); // Redireciona para a tela de início
+        console.log("Token armazenado:", response.data.token);
+
+        // Redireciona para a tela de início
+        navigate("/");
       } else {
         alert("Cadastro bem-sucedido!");
         // Armazena o nome do usuário no localStorage após o cadastro
@@ -98,7 +100,7 @@ const Auth = () => {
     } catch (error) {
       console.error("Erro:", error.response?.data || error.message);
       setErro(error.response?.data?.message || "Ocorreu um erro. Tente novamente.");
-  
+
       if (isLogin) {
         setTentativasLogin(tentativasLogin + 1);
         if (tentativasLogin >= 3) {
@@ -107,12 +109,6 @@ const Auth = () => {
         }
       }
     }
-    //Axios envia para a Rota Restrita 
-    axios.get("/rota-restrita", {
-      headers: {
-        "user-type": localStorage.getItem("userType"), // Envia o tipo de usuário no cabeçalho
-      },
-    });
   };
 
   return (

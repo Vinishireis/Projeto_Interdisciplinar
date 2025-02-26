@@ -13,7 +13,7 @@ import ProfileSettings from "./components/ProfileSettings/ProfileSettings ";
 
 
 const App = () => {
-  const isAuthenticated = false; // Simule um usuário autenticado (troque para `true` se necessário)
+  const isAuthenticated = true; // Simule um usuário autenticado (troque para `true` se necessário)
   const location = useLocation();
 
   return (
