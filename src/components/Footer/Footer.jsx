@@ -1,9 +1,9 @@
 import React from "react";
 import { FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
+import { Link } from "react-router-dom"; // Importe o Link
 import FooterImg from "../../assets/footer.jpg";
 import instituto_criativo_logo from "../../assets/instituto_criativo_logo.png";
-
 
 const FooterBg = {
   backgroundImage: `url(${FooterImg})`,
@@ -25,7 +25,7 @@ const Footer = () => {
                 <p>Instituto Criativo</p>
               </div>
               <p>
-              O Instituto Criativo é uma ONG que nasceu para transformar a vida das pessoas.
+                O Instituto Criativo é uma ONG que nasceu para transformar a vida das pessoas.
               </p>
               <div className="flex items-center justify-start gap-5 !mt-6">
                 <a href="#" className="hover:text-secondary duration-200">
@@ -50,24 +50,24 @@ const Footer = () => {
                 </h1>
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <Link to="/" className="hover:text-secondary duration-200">
                       Inicio
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <Link to="/sobre" className="hover:text-secondary duration-200">
                       Sobre
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <Link to="/servicos" className="hover:text-secondary duration-200">
                       Serviços
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/auth" className="hover:text-secondary duration-200">
+                    <Link to="/auth" className="hover:text-secondary duration-200">
                       Login
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -77,24 +77,24 @@ const Footer = () => {
                 </h1>
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <Link to="/aprendizado" className="hover:text-secondary duration-200">
                       Aprendizado
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
+                    <Link to="/primeiro-emprego" className="hover:text-secondary duration-200">
                       Primeiro Emprego
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
-                    Recolocação
-                    </a>
+                    <Link to="/recolocacao" className="hover:text-secondary duration-200">
+                      Recolocação
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-secondary duration-200">
-                    Bem-Estar
-                    </a>
+                    <Link to="/bem-estar" className="hover:text-secondary duration-200">
+                      Bem-Estar
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -104,24 +104,24 @@ const Footer = () => {
                 </h1>
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <a href="/termsconditions" className="hover:text-secondary duration-200">
+                    <Link to="/termsconditions" className="hover:text-secondary duration-200">
                       Termos e Condições
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/privacypolicy" className="hover:text-secondary duration-200">
+                    <Link to="/privacypolicy" className="hover:text-secondary duration-200">
                       Política de Privacidade
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/contact" className="hover:text-secondary duration-200">
+                    <Link to="/contact" className="hover:text-secondary duration-200">
                       Contato
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/faq" className="hover:text-secondary duration-200">
+                    <Link to="/faq" className="hover:text-secondary duration-200">
                       FAQ
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
