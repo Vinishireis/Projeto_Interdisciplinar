@@ -140,7 +140,7 @@ const Auth = () => {
                 placeholder="Seu Nome Completo"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
                 required
               />
             </div>
@@ -152,7 +152,7 @@ const Auth = () => {
               placeholder="Seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
               required
             />
           </div>
@@ -164,7 +164,7 @@ const Auth = () => {
                 placeholder="Sua senha"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
                 required
               />
               <button
@@ -221,7 +221,7 @@ const Auth = () => {
                   placeholder="Confirme sua senha"
                   value={confirmarSenha}
                   onChange={(e) => setConfirmarSenha(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
                   required
                 />
                 <button
@@ -275,7 +275,7 @@ const Auth = () => {
             <select
               value={tipo}
               onChange={(e) => setTipo(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
               required
             >
               <option value="pessoa_fisica">Pessoa Física</option>
@@ -287,7 +287,7 @@ const Auth = () => {
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="w-full bg-orange-500 text-white font-semibold py-3 rounded-lg hover:bg-orange-600 transition-all duration-200 transform hover:scale-105"
+              className="w-full bg-yellow-400 text-white font-semibold py-3 rounded-lg hover:bg-yellow-300 transition-all duration-200 transform hover:scale-105"
             >
               {isLogin ? "Entrar" : "Criar Conta"}
             </button>
