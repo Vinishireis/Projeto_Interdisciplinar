@@ -10,6 +10,7 @@ import Contact from "./components/Contact/Contact";
 import TermsConditions from "./components/TermsConditions/TermsConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import ProfileSettings from "./components/ProfileSettings/ProfileSettings ";
+import SocialImpact from "./components/Socialmpact/SocialImpact";
 
 
 const App = () => {
@@ -54,6 +55,9 @@ const App = () => {
 
         {/* Rota Tela de Configurações de Perfil */}
         <Route path="/profile-settings" element={<ProfileSettings />} />
+
+        {/* Rota Impacto Social */}   
+        <Route path="/social-impact" element={<SocialImpact />} />  
 
       </Routes>
     </>

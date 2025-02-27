@@ -7,7 +7,7 @@ export const NavbarMenu = [
   {
     id: 2,
     title: "Impacto Social",
-    link: "#",
+    link: "/social-impact",
   },
   {
     id: 3,
