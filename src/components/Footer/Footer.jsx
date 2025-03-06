@@ -1,7 +1,7 @@
 import React from "react";
 import { FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
-import { Link } from "react-router-dom"; // Importe o Link
+import { Link } from "react-router-dom";
 import FooterImg from "../../assets/footer.jpg";
 import instituto_criativo_logo from "../../assets/instituto_criativo_logo.png";
 
@@ -21,28 +21,53 @@ const Footer = () => {
             {/* brand info section */}
             <div className="py-8 px-4 space-y-4">
               <div className="text-2xl flex items-center gap-2 font-bold">
-                <img src={instituto_criativo_logo} alt="Instituto Criativo Logo" className="w-10 h-10" />
+                <img
+                  src={instituto_criativo_logo}
+                  alt="Instituto Criativo Logo"
+                  className="w-10 h-10"
+                />
                 <p>Instituto Criativo</p>
               </div>
               <p>
                 O Instituto Criativo é uma ONG que nasceu para transformar a vida das pessoas.
               </p>
               <div className="flex items-center justify-start gap-5 !mt-6">
-                <a href="#" className="hover:text-secondary duration-200">
+                <a
+                  href="https://www.google.com/maps/place/Instituto+Criativo"
+                  className="hover:text-secondary duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <HiLocationMarker className="text-3xl" />
                 </a>
-                <a href="https://www.instagram.com/institutocriativo?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="hover:text-secondary duration-200">
+                <a
+                  href="https://www.instagram.com/institutocriativo/"
+                  className="hover:text-secondary duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaInstagram className="text-3xl" />
                 </a>
-                <a href="https://api.whatsapp.com/send?phone=5511910747492&text=Quero%20falar%20sobre%20o%20Instituto%20Criativo" className="hover:text-secondary duration-200">
+                <a
+                  href="https://api.whatsapp.com/send?phone=5511910747492&text=Quero%20falar%20sobre%20o%20Instituto%20Criativo"
+                  className="hover:text-secondary duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaWhatsapp className="text-3xl" />
                 </a>
-                <a href="https://www.linkedin.com/company/institutocriativo/?originalSubdomain=br" className="hover:text-secondary duration-200">
+                <a
+                  href="https://www.linkedin.com/company/institutocriativo/"
+                  className="hover:text-secondary duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaLinkedin className="text-3xl" />
                 </a>
               </div>
             </div>
-            {/* Footer Links  */}
+
+            {/* Footer Links */}
             <div className="grid grid-cols-2 md:grid-cols-3 md:col-span-3 md:ml-14">
               <div className="py-8 px-4">
                 <h1 className="sm:text-xl text-xl font-bold sm:text-left text-justify mb-5">
@@ -51,7 +76,7 @@ const Footer = () => {
                 <ul className="flex flex-col gap-3">
                   <li>
                     <Link to="/" className="hover:text-secondary duration-200">
-                      Inicio
+                      Início
                     </Link>
                   </li>
                   <li>
@@ -127,11 +152,11 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          {/* copyright section  */}
+
+          {/* copyright section */}
           <div className="mt-8">
             <div className="text-center py-6 border-t-2 border-gray-800/10">
               <span className="text-sm text-black/60">
-                {" "}
                 @copyright 2025 Instituto Criativo
               </span>
             </div>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom"; // Adicionado useNavigate
+import { Link, useNavigate } from "react-router-dom";
+import { NavbarMenu } from "../../mockData/data.js";
 
 const ResponsiveMenu = ({ isOpen }) => {
   const [userName, setUserName] = useState("");
-  const navigate = useNavigate(); // Hook para redirecionamento
+  const navigate = useNavigate();
 
   // Verifica se há um nome de usuário no localStorage ao carregar o componente
   useEffect(() => {
@@ -29,40 +30,27 @@ const ResponsiveMenu = ({ isOpen }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
           transition={{ duration: 0.3 }}
-          className="absolute top-20 left-0 w-full h-screen z-20 lg:hidden"
+          className="absolute top-20 left-0 w-full h-screen z-20 bg-primary lg:hidden"
         >
-          <div className="text-xl font-semibold uppercase bg-primary text-black py-10 m-6 rounded-3xl">
-            <ul className="flex flex-col justify-center items-center gap-10">
-              <li>
-                <Link to="/" className="hover:text-orange-500 transition-colors duration-200">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link to="/sobre" className="hover:text-orange-500 transition-colors duration-200">
-                  Sobre
-                </Link>
-              </li>
-              <li>
-                <Link to="/servico" className="hover:text-orange-500 transition-colors duration-200">
-                  Serviço
-                </Link>
-              </li>
-              <li>
-                <Link to="/galeria" className="hover:text-orange-500 transition-colors duration-200">
-                  Galeria
-                </Link>
-              </li>
-              <li>
-                <Link to="/contato" className="hover:text-orange-500 transition-colors duration-200">
-                  Contato
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="hover:text-orange-500 transition-colors duration-200">
-                  Blog
-                </Link>
-              </li>
+          <div className="text-xl font-semibold uppercase py-10 m-6 rounded-3xl">
+            <ul className="flex flex-col justify-center items-center gap-6">
+              {NavbarMenu.map((item) => (
+                <li key={item.id}>
+                  {item.link === "#" ? (
+                    <span className="text-gray-400 opacity-50 cursor-not-allowed">
+                      {item.title}
+                    </span>
+                  ) : (
+                    <Link
+                      to={item.link}
+                      className="hover:text-orange-500 transition-colors duration-200"
+                    >
+                      {item.title}
+                    </Link>
+                  )}
+                </li>
+              ))}
+
               {userName ? (
                 <>
                   <li className="text-orange-500">Olá, {userName}!</li>
