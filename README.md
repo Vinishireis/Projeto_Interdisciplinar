@@ -1,6 +1,10 @@
-# Projeto Interdisciplinar - 2° Semestre
+# 📊 Projeto Interdisciplinar - 2° Semestre
 
-Este repositório contém o desenvolvimento do **Projeto Interdisciplinar** referente ao 2° semestre. O projeto tem como objetivo integrar conhecimentos de diversas disciplinas do curso, promovendo o aprendizado prático e colaborativo.
+<p align="center">
+  <img src="https://camo.githubusercontent.com/f792fb9773905cab093295f28e2251e854dec3210920fb641c8acaab068f701c/68747470733a2f2f656e637279707465642d74626e302e677374617469632e636f6d2f696d616765733f713d74626e3a414e6439476352685a5072526138394b6d61305a5a6f67786d3070692d74436e5f544c4b65484756787977702d4c584146475233423144506f75414a5948674b5a4756305854456634414526757371703d434155" alt="FECAP Logo" width="200">
+</p>
+
+## 🏫 FECAP - Fundação de Comércio Álvares Penteado
 
 ---
 
@@ -19,18 +23,32 @@ O **Projeto Interdisciplinar** visa desenvolver uma solução prática que englo
 
 ---
 
+## 🚀 **Tecnologias Utilizadas**
+
+O projeto utiliza as seguintes ferramentas e tecnologias:
+
+- **Frontend:** React + Vite
+- **Estilização:** Tailwind CSS
+- **Backend:** .NET
+- **Banco de Dados:** MySQL
+- **Gerenciamento de Estado:** Context API
+- **Gráficos e Visualizações:** Recharts
+- **Outras Ferramentas:** ESLint, Prettier, PostCSS
+
+---
+
 ## 📂 **Estrutura do Repositório**
 
-```plaintext
+```
 Projeto_Interdisciplinar/
 ├── docs/                     # Documentação do projeto
 │   ├── requisitos.md         # Requisitos do projeto
 │   ├── cronograma.md         # Cronograma de atividades
 │   └── relatório_final.md    # Relatório final
 ├── src/                      # Código-fonte do projeto
-│   ├── frontend/             # Código do frontend (caso aplicável)
-│   ├── backend/              # Código do backend (caso aplicável)
-│   └── scripts/              # Scripts auxiliares
+│   ├── frontend/             # Código do frontend (React + Vite)
+│   ├── backend/              # Código do backend (.NET)
+│   └── database/             # Configuração do banco de dados (MySQL)
 ├── assets/                   # Arquivos de mídia (imagens, vídeos, etc.)
 ├── tests/                    # Testes do projeto
 ├── README.md                 # Documentação principal
@@ -39,96 +57,89 @@ Projeto_Interdisciplinar/
 
 ---
 
-## 🛠️ **Tecnologias Utilizadas**
-
-O projeto utiliza as seguintes ferramentas e tecnologias:
-
-- **Linguagens de Programação**: [exemplo: Python, JavaScript, etc.]
-- **Frameworks**: [exemplo: React, Flask, etc.]
-- **Ferramentas de Gerenciamento**: [exemplo: Trello, GitHub Projects, etc.]
-- **Outros Recursos**: [exemplo: APIs externas, bibliotecas específicas, etc.]
-
----
-
 ## 👨‍👩‍👧‍👦 **Equipe**
 
 Os participantes deste projeto são:
 
-- [<a href = "https://github.com/Marcos-Yogi">Marcos Hiroshi</a>](#) - Função
-- [<a href = "https://github.com/Vinishireis">Vinícius Nishimura</a>](#) - Função
-- [<a href = "https://github.com/brenocosta19">Breno Costa</a>](#) - Função
-- [<a href = "https://github.com/BrunoSouza06">Bruno Souza</a>](#) - Função
+- [<a href="https://github.com/Marcos-Yogi">Marcos Hiroshi</a>](#) - Líder Técnico
+- [<a href="https://github.com/Vinishireis">Vinícius Nishimura</a>](#) - Líder do Frontend
+- [<a href="https://github.com/brenocosta19">Breno Costa</a>](#) - Designer UX/UI
+- [<a href="https://github.com/BrunoSouza06">Bruno Souza</a>](#) - Desenvolvedor Backend
+- [<a href="https://github.com/Yamaschita">Felipe Yamaschita</a>](#) - Desenvolvedor Full Stack
 
 ---
-## Funções e Cronograma **Não Oficial**
 
----
+## 🗓️ **Cronograma de Desenvolvimento**
 
-### **Cronograma - Duração: 16 Semanas**
-| **Semana** | **Atividade**                                 | **Responsável Principal**  | **Detalhes**                                                                 |
-|------------|-----------------------------------------------|----------------------------|------------------------------------------------------------------------------|
-| 1-2        | Definição da ODS e escopo do projeto          | Toda a equipe             | Reunião para decidir ODS, público-alvo, funcionalidades principais.         |
-| 3          | Wireframes e protótipo inicial               | Breno (Design UX/UI)      | Criação de layout básico e fluxos de navegação da aplicação.                |
-| 4          | Arquitetura do sistema                       | Marcos (Líder Técnico)    | Decisão sobre tecnologias e estrutura de pastas/camadas da aplicação.       |
-| 5-6        | Desenvolvimento do FrontEnd (HTML/CSS/JS)    | Vinícius e Breno          | Codificação do layout e interação inicial.                                  |
-| 7-8        | Configuração do BackEnd                      | Bruno e Marcos            | Criação do servidor, banco de dados e APIs.                                 |
-| 9          | Integração FrontEnd e BackEnd                | Toda a equipe             | Conexão entre as interfaces e os dados.                                     |
-| 10         | Testes iniciais                              | Toda a equipe             | Testar fluxo de dados e identificar bugs.                                   |
-| 11         | Melhorias e ajustes                          | Breno e Marcos            | Refinamento do design e otimização do código.                               |
-| 12-13      | Implementação de funcionalidades avançadas   | Vinícius e Bruno          | Adição de novas features com base na revisão inicial.                       |
-| 14         | Testes finais e validação                    | Toda a equipe             | Testes completos (usabilidade, segurança, desempenho).                      |
-| 15         | Documentação e apresentação                  | Bruno e Vinícius          | Preparação do pitch e documentação técnica.                                 |
-| 16         | Entrega final                                | Toda a equipe             | Submissão do projeto e feedback.                                            |
+| **Semana** | **Atividade**                                 | **Responsável Principal**  |
+|------------|-----------------------------------------------|----------------------------|
+| 1-2        | Definição do escopo e ODS                     | Toda a equipe             |
+| 3          | Wireframes e protótipo inicial               | Breno (UX/UI)             |
+| 4          | Arquitetura do sistema                       | Marcos (Líder Técnico)    |
+| 5-6        | Desenvolvimento do FrontEnd (HTML/CSS/JS)    | Vinícius e Breno          |
+| 7-8        | Configuração do BackEnd                      | Bruno e Marcos            |
+| 9          | Integração FrontEnd e BackEnd                | Toda a equipe             |
+| 10         | Testes iniciais                              | Toda a equipe             |
+| 11         | Melhorias e ajustes                          | Breno e Marcos            |
+| 12-13      | Implementação de funcionalidades avançadas   | Vinícius e Bruno          |
+| 14         | Testes finais e validação                    | Toda a equipe             |
+| 15         | Documentação e apresentação                  | Felipe e Vinícius         |
+| 16         | Entrega final                                | Toda a equipe             |
 
 ---
 
 ### **Tabela de Funções**
+
 | **Membro**     | **Função Principal**          | **Responsabilidades Secundárias**                                      |
-|-----------------|------------------------------|------------------------------------------------------------------------|
+|---------------|------------------------------|------------------------------------------------------------------------|
 | **Vinícius**   | Líder do FrontEnd            | Suporte no BackEnd, apresentação e documentação.                      |
 | **Breno**      | Designer UX/UI               | Codificação do FrontEnd, ajustes visuais e testes de usabilidade.     |
 | **Bruno**      | Desenvolvedor BackEnd        | Suporte na integração com FrontEnd e testes de APIs.                  |
 | **Marcos**     | Líder Técnico                | Decisão arquitetural, configuração inicial do BackEnd e otimização.   |
-
+| **Felipe**     | Desenvolvedor Full Stack     | Implementação de funcionalidades e integração de APIs.                |
 ---
 
-## 🗓️ **Cronograma**
+## 🚀 **Como Executar o Projeto**
 
-| Etapa                 | Descrição                              | Prazo        |
-|-----------------------|------------------------------------------|--------------|
-| Planejamento          | Levantamento de requisitos e escopo     | DD/MM/AAAA   |
-| Desenvolvimento       | Implementação da solução               | DD/MM/AAAA   |
-| Testes e Ajustes      | Validação e refinamento                 | DD/MM/AAAA   |
-| Apresentação Final    | Entrega e apresentação do projeto       | DD/MM/AAAA   |
+### 🔧 Pré-requisitos
+Antes de começar, certifique-se de ter instalado:
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- [Visual Studio Code](https://code.visualstudio.com/)
 
----
+### 🛠️ Passo a Passo
 
-## 🚀 **Como Executar**
-
-### Pré-requisitos:
-1. Instale as dependências:
-   ```bash
-   npm install  # ou outro comando relevante
+1. **Clone o repositório**
+   ```sh
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   cd seu-repositorio
    ```
-2. Configure o ambiente:
-   ```bash
-   cp .env.example .env
+
+2. **Instale as dependências**
+   ```sh
+   npm install
    ```
-3. Inicie o projeto:
-   ```bash
-   npm start  # ou outro comando relevante
+
+3. **Inicie o servidor de desenvolvimento**
+   ```sh
+   npm run dev
+   ```
+
+4. Acesse no navegador:
+   ```
+   http://localhost:5173/
    ```
 
 ### Execução dos testes:
 ```bash
-npm test  # ou comando relevante
+npm test
 ```
 
 ---
 
 ## 📜 **Licença**
 
-Este projeto está licenciado sob a licença [CC0 1.0 Universal](LICENSE). Sinta-se à vontade para utilizá-lo, modificá-lo e distribuí-lo conforme necessário.
+Este projeto está licenciado sob a licença [MIT](LICENSE). Sinta-se à vontade para utilizá-lo, modificá-lo e distribuí-lo conforme necessário.
 
 ---
 

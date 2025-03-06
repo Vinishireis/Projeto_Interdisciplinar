@@ -11,6 +11,7 @@ import TermsConditions from "./components/TermsConditions/TermsConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import ProfileSettings from "./components/ProfileSettings/ProfileSettings ";
 import SocialImpact from "./components/Socialmpact/SocialImpact";
+import Segment from "./components/Segment/Segment"; 
 
 
 const App = () => {
@@ -58,7 +59,11 @@ const App = () => {
 
         {/* Rota Impacto Social */}   
         <Route path="/social-impact" element={<SocialImpact />} />  
-
+        
+        {/* Rota Segmento */}
+        <Route path="/segment" element={<Segment />} />
+    
+        {/* Rota Sobre Nós */}
       </Routes>
     </>
   );
