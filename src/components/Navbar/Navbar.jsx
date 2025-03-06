@@ -45,12 +45,18 @@ const Navbar = () => {
             <ul className="flex items-center gap-6">
               {NavbarMenu.map((item) => (
                 <li key={item.id}>
-                  <a
-                    href={item.link}
-                    className="inline-block text-gray-600 text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-secondary transition-all duration-300 font-semibold"
-                  >
-                    {item.title}
-                  </a>
+                  {item.link === "#" ? (
+                    <span className="inline-block text-gray-400 text-sm xl:text-base py-1 px-2 xl:px-3 font-semibold cursor-not-allowed opacity-50">
+                      {item.title}
+                    </span>
+                  ) : (
+                    <Link
+                      to={item.link}
+                      className="inline-block text-gray-600 text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-secondary transition-all duration-300 font-semibold"
+                    >
+                      {item.title}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -58,32 +64,32 @@ const Navbar = () => {
 
           {/* CTA Button section */}
           <div className="hidden lg:block space-x-6">
-          {userName ? (
-  <div className="flex items-center gap-4">
-    <span className="text-secondary font-semibold">Olá, {userName}!</span>
-    <button
-      onClick={() => {
-        localStorage.removeItem("userName");
-        setUserName(""); // Limpa o estado
-        window.location.reload(); // Recarrega a página (opcional)
-      }}
-      className="text-white bg-red-500 font-semibold rounded-full px-4 py-2"
-    >
-      Logout
-    </button>
-  </div>
-) : (
-  <>
-    <Link to="/auth">
-      <button className="font-semibold">Login</button>
-    </Link>
-    <Link to="/auth?mode=signup">
-      <button className="text-white bg-secondary font-semibold rounded-full px-6 py-2">
-        Inscreva-se
-      </button>
-    </Link>
-  </>
-)}
+            {userName ? (
+              <div className="flex items-center gap-4">
+                <span className="text-secondary font-semibold">Olá, {userName}!</span>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("userName");
+                    setUserName(""); // Limpa o estado
+                    window.location.reload(); // Recarrega a página (opcional)
+                  }}
+                  className="text-white bg-red-500 font-semibold rounded-full px-4 py-2"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link to="/auth">
+                  <button className="font-semibold">Login</button>
+                </Link>
+                <Link to="/auth?mode=signup">
+                  <button className="text-white bg-secondary font-semibold rounded-full px-6 py-2">
+                    Inscreva-se
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Hamburger Menu */}
