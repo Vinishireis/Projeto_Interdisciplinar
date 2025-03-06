@@ -8,8 +8,10 @@ import Footer from "../Footer/Footer"; // Importe o Footer
 const SocialImpact = () => {
   return (
     <>
+    {/* Bloueia a rolagem lateral no body */}
+    <div className="overflow-x-hidden">
       {/* Seção Hero */}
-      <div className="container grid grid-cols-1 min-h-[650px] relative">
+      <div className="container grid grid-cols-1 min-h-[650px] relative ">
         {/* Texto de fundo */}
         <div className="absolute inset-0 flex justify-center items-center">
           <h1 className="text-[100px] md:text-[150px] lg:text-[150px] font-bold text-gray-300 opacity-20 text-center -z-10">
@@ -197,6 +199,7 @@ const SocialImpact = () => {
       
      {/* Footer */}
      <Footer />
+    </div>
     </>
   );
 };
